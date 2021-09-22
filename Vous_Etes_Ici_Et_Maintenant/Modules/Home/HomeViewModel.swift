@@ -13,25 +13,25 @@ class HomeViewModel {
     init (dataStore : CurrentDayDataStore) {
         self.dataStore = dataStore
     }
-    
-    private var currentDayStore : Day {
-        dataStore.currentDay
+
+    public var currentDay : String  {
+        dataStore.currentDay.dayName
     }
     
-    public var currentDay : String {
-        currentDayStore.currentDay
-    }
+    public lazy var goalTimeOfTheDay : Double = {
+        dataStore.currentDay.goalTime
+    }()
     
-    public var goalTime : Double {
-        currentDayStore.goalTime
-    }
+    public var subGoalTime : Double = 3
     
-    public var currentTime : Double {
-        currentDayStore.currentTime
-    }
+  
+    public lazy var currentDoneTimeOfTheDay : Double = {
+        dataStore.currentDay.currentTime
+    }()
+    
     
     public var isGoalAchieve : Bool {
-        currentDayStore.isGoalAchieve
+        dataStore.currentDay.isGoalAchieve
     }
     
     

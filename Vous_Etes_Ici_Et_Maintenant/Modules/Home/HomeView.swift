@@ -17,6 +17,7 @@ class HomeView : UIView {
         return dayLabel
     }()
     
+    
     var goalTimeLabel : UILabel = {
         let goalTimeLabel = UILabel()
         goalTimeLabel.textAlignment = .center
@@ -33,23 +34,53 @@ class HomeView : UIView {
         return currentTimeLabel
     }()
     
+    var playButton : UIButton = {
+        let playButton = UIButton()
+        playButton.setTitle("Play", for: .normal)
+        playButton.setTitleColor(UIColor.black, for: .normal)
+        return playButton
+    }()
+    var pauseButton : UIButton = {
+        let pauseButton = UIButton()
+        pauseButton.setTitle("Pause", for: .normal)
+        pauseButton.setTitleColor(UIColor.black, for: .normal)
+        return pauseButton
+    }()
+    
+    var circularProgressView : CircularProgressView = {
+        let circularProgressView = CircularProgressView(frame: CGRect(x: 0, y: 0, width: 150, height: 150))
+        return circularProgressView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(dayLabel)
         addSubview(goalTimeLabel)
         addSubview(currentTimeLabel)
+        addSubview(circularProgressView)
+        addSubview(playButton)
+        addSubview(pauseButton)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     public func configureHomeView(_ viewModel : HomeViewModel){
         setupConstraints()
+        
+        self.circularProgressView.createCircularPath(endPointSubGoal: viewModel.currentDoneTimeOfTheDay/viewModel.goalTimeOfTheDay + viewModel.subGoalTime/viewModel.goalTimeOfTheDay)
+        
+    
         dayLabel.text = viewModel.currentDay
-        goalTimeLabel.text = "Votre objectif du jour est de \(viewModel.goalTime) minutes"
-        currentTimeLabel.text = "Vous avez effectué \(viewModel.currentTime) minutes de méditation aujourd'hui"
+        goalTimeLabel.text = "Votre objectif du jour est de \(viewModel.goalTimeOfTheDay) minutes"
+        
     }
+    
+
+    
+    
     
     private func setupConstraints(){
         dayLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -69,6 +100,24 @@ class HomeView : UIView {
         currentTimeLabel.topAnchor.constraint(equalTo: goalTimeLabel.bottomAnchor, constant: 20).isActive = true
         currentTimeLabel.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor).isActive = true
         currentTimeLabel.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor).isActive = true
+        
+        circularProgressView.translatesAutoresizingMaskIntoConstraints = false
+        circularProgressView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        circularProgressView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        circularProgressView.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        circularProgressView.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        
+        playButton.translatesAutoresizingMaskIntoConstraints = false
+        playButton.topAnchor.constraint(equalTo: circularProgressView.bottomAnchor).isActive = true
+        playButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        playButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        pauseButton.translatesAutoresizingMaskIntoConstraints = false
+        pauseButton.topAnchor.constraint(equalTo: playButton.bottomAnchor).isActive = true
+        pauseButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        pauseButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        
     }
     
 }

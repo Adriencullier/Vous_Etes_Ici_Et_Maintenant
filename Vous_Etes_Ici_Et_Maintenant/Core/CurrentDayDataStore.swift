@@ -16,7 +16,7 @@ class CurrentDayDataStore {
     lazy var today = getToday()
     
     public var currentDay : Day {
-        let currentDay = Day(currentDay: dayName, isGoalAchieve: isGoalAchieve, goalTime: goalTime, currentTime: currentTime)
+        let currentDay = Day(dayName: dayName, isGoalAchieve: isGoalAchieve, goalTime: goalTimeOfTheDay, currentTime: currentTime)
         return currentDay
     }
         
@@ -38,7 +38,7 @@ class CurrentDayDataStore {
         }
     }
     
-    private var goalTime : Double = UserDefaults.standard.object(forKey: "goalTime") as? Double ?? 15 {
+    private var goalTimeOfTheDay : Double = UserDefaults.standard.object(forKey: "goalTime") as? Double ?? 15 {
         willSet {
             UserDefaults.standard.set(newValue, forKey: "goalTime")
         }
@@ -60,7 +60,7 @@ class CurrentDayDataStore {
     }
     
     public func updateGoalTime (newValue : Double) {
-        self.goalTime = newValue
+        self.goalTimeOfTheDay = newValue
     }
     
     public func updateCurrentTime (newValue : Double) {
@@ -71,7 +71,7 @@ class CurrentDayDataStore {
     /// 2- If today is different, it creates a new Day
     public func initToday () {
         let today = getToday()
-        if self.currentDay.currentDay != today {
+        if self.currentDay.dayName != today {
         todayIsANewDay()
         }
     }

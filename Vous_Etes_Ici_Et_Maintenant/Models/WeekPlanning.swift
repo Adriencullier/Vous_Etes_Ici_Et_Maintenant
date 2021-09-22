@@ -9,7 +9,7 @@ import Foundation
 
 
 struct Day {
-    var currentDay : String = ""
+    var dayName : String = ""
     var isGoalAchieve : Bool = false
     var goalTime : Double = 15
     var currentTime : Double = 0
