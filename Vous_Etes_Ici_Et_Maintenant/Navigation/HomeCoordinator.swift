@@ -29,13 +29,13 @@ class HomeCoordinator : Coordinator {
     
 }
 
-extension HomeCoordinator : ViewControllerDelegate {
+extension HomeCoordinator : HomeViewControllerDelegate {
     func changeGoalTimeButtonTapped() {
         delegate?.showEditGoalTime()
     }
     
     func pauseButtonDidTapped(_ viewModel : HomeViewModel) {
-        delegate?.updateDataStore(viewModel)
+        delegate?.updateAllDataStore(viewModel)
     }
     
     

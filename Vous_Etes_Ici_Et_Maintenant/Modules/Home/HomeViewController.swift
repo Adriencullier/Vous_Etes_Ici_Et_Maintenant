@@ -12,7 +12,7 @@ class HomeViewController : UIViewController {
     
     var timer = Timer()
     var timerIsPlayed = false
-    var delegate : ViewControllerDelegate?
+    var delegate : HomeViewControllerDelegate?
     
     
     var viewModel: HomeViewModel
@@ -76,7 +76,8 @@ class HomeViewController : UIViewController {
         delegate?.changeGoalTimeButtonTapped()
     }
     
-    private func reloadView() {
+    public func reloadView() {
+        
         homeView?.configureHomeView(viewModel, timerIsPlayed: timerIsPlayed)
     }
     

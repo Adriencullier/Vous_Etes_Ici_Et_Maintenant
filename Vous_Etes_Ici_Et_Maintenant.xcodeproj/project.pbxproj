@@ -23,6 +23,11 @@
 		0344D2C426F9C33100B42463 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0344D2C326F9C33100B42463 /* CircularProgressView.swift */; };
 		03E704B826FB3027001DC042 /* ViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E704B726FB3026001DC042 /* ViewControllerDelegate.swift */; };
 		03E704BA26FB32BB001DC042 /* CoordinatorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E704B926FB32BB001DC042 /* CoordinatorDelegate.swift */; };
+		03E704BD26FB3B6A001DC042 /* EditGoalTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E704BC26FB3B6A001DC042 /* EditGoalTimeViewController.swift */; };
+		03E704BF26FB3B83001DC042 /* EditGoalTimeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E704BE26FB3B83001DC042 /* EditGoalTimeViewModel.swift */; };
+		03E704C126FB3B97001DC042 /* EditGoalTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E704C026FB3B97001DC042 /* EditGoalTimeView.swift */; };
+		03E704C326FB3BB8001DC042 /* EditGoalTimeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E704C226FB3BB8001DC042 /* EditGoalTimeCoordinator.swift */; };
+		03E704C526FB478F001DC042 /* EditGoalTimeViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E704C426FB478F001DC042 /* EditGoalTimeViewControllerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +60,11 @@
 		0344D2C326F9C33100B42463 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		03E704B726FB3026001DC042 /* ViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerDelegate.swift; sourceTree = "<group>"; };
 		03E704B926FB32BB001DC042 /* CoordinatorDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorDelegate.swift; sourceTree = "<group>"; };
+		03E704BC26FB3B6A001DC042 /* EditGoalTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGoalTimeViewController.swift; sourceTree = "<group>"; };
+		03E704BE26FB3B83001DC042 /* EditGoalTimeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGoalTimeViewModel.swift; sourceTree = "<group>"; };
+		03E704C026FB3B97001DC042 /* EditGoalTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGoalTimeView.swift; sourceTree = "<group>"; };
+		03E704C226FB3BB8001DC042 /* EditGoalTimeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGoalTimeCoordinator.swift; sourceTree = "<group>"; };
+		03E704C426FB478F001DC042 /* EditGoalTimeViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGoalTimeViewControllerDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,7 +140,6 @@
 			children = (
 				03E704BB26FB38F4001DC042 /* Edtit Goal Time */,
 				0344D2A426F85E3000B42463 /* Home */,
-				03E704B726FB3026001DC042 /* ViewControllerDelegate.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -142,6 +151,7 @@
 				0344D2A226F85BB500B42463 /* Protocol Navigation */,
 				0344D29C26F85B5100B42463 /* MainCoordinator.swift */,
 				0344D29E26F85B5C00B42463 /* HomeCoordinator.swift */,
+				03E704C226FB3BB8001DC042 /* EditGoalTimeCoordinator.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -165,6 +175,7 @@
 		0344D2A426F85E3000B42463 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				03E704B726FB3026001DC042 /* ViewControllerDelegate.swift */,
 				0344D2A526F85E3C00B42463 /* HomeViewController.swift */,
 				0344D2C326F9C33100B42463 /* CircularProgressView.swift */,
 				0344D2C126F8C76D00B42463 /* HomeView.swift */,
@@ -192,6 +203,10 @@
 		03E704BB26FB38F4001DC042 /* Edtit Goal Time */ = {
 			isa = PBXGroup;
 			children = (
+				03E704BC26FB3B6A001DC042 /* EditGoalTimeViewController.swift */,
+				03E704C026FB3B97001DC042 /* EditGoalTimeView.swift */,
+				03E704BE26FB3B83001DC042 /* EditGoalTimeViewModel.swift */,
+				03E704C426FB478F001DC042 /* EditGoalTimeViewControllerDelegate.swift */,
 			);
 			path = "Edtit Goal Time";
 			sourceTree = "<group>";
@@ -300,10 +315,15 @@
 				0344D2AF26F863FF00B42463 /* WeekPlanning.swift in Sources */,
 				0344D2B126F8685C00B42463 /* CurrentDayDataStore.swift in Sources */,
 				0344D2C226F8C76D00B42463 /* HomeView.swift in Sources */,
+				03E704C126FB3B97001DC042 /* EditGoalTimeView.swift in Sources */,
 				0344D28426F85AA700B42463 /* AppDelegate.swift in Sources */,
 				03E704B826FB3027001DC042 /* ViewControllerDelegate.swift in Sources */,
+				03E704C526FB478F001DC042 /* EditGoalTimeViewControllerDelegate.swift in Sources */,
 				0344D29F26F85B5C00B42463 /* HomeCoordinator.swift in Sources */,
+				03E704C326FB3BB8001DC042 /* EditGoalTimeCoordinator.swift in Sources */,
 				0344D2A126F85B7300B42463 /* CoordinatorProtocol.swift in Sources */,
+				03E704BF26FB3B83001DC042 /* EditGoalTimeViewModel.swift in Sources */,
+				03E704BD26FB3B6A001DC042 /* EditGoalTimeViewController.swift in Sources */,
 				0344D29D26F85B5100B42463 /* MainCoordinator.swift in Sources */,
 				0344D28626F85AA700B42463 /* SceneDelegate.swift in Sources */,
 				03E704BA26FB32BB001DC042 /* CoordinatorDelegate.swift in Sources */,

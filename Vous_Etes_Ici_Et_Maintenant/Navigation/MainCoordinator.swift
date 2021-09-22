@@ -24,6 +24,12 @@ class MainCoordinator : Coordinator {
         return homeCoordinator
     }()
     
+    lazy var editGoalTimeCoordinator : EditGoalTimeCoordinator = {
+        let editGoalTimeCoordinator = EditGoalTimeCoordinator(navigationController: navigationController, dataStore: dataStore)
+        editGoalTimeCoordinator.delegate = self
+        return editGoalTimeCoordinator
+    }()
+    
     func start() {
         homeCoordinator.start()
     }
@@ -32,11 +38,27 @@ class MainCoordinator : Coordinator {
 }
 
 extension MainCoordinator : CoordinatorDelegate {
-    func showEditGoalTime() {
+    func reloadHomeView() {
+        print("reload")
+        self.homeCoordinator.viewController?.reloadView()
+    }
+    
+    func dismissEditGoalTimeView() {
+        editGoalTimeCoordinator.dismiss()
         
     }
     
-    func updateDataStore(_ viewModel: HomeViewModel) {
+    
+    func updateGoalTimeDataStore(goalTime: Double) {
+        print ("updated")
+        dataStore.updateGoalTime(newValue: goalTime)
+    }
+    
+    func showEditGoalTime() {
+        editGoalTimeCoordinator.start()
+    }
+    
+    func updateAllDataStore(_ viewModel: HomeViewModel) {
         dataStore.updateDataStore(dayName: viewModel.currentDayName, isGoalAchieve: viewModel.isGoalAchieve, goalTime: viewModel.goalTimeOfTheDay, currentTime: viewModel.currentDoneTimeOfTheDay)
     }
     

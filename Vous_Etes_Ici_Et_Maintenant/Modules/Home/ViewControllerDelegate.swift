@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ViewControllerDelegate {
+protocol HomeViewControllerDelegate {
     func pauseButtonDidTapped(_ viewModel : HomeViewModel)
     func changeGoalTimeButtonTapped ()
 }
