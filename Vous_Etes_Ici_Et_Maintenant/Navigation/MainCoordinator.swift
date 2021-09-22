@@ -20,6 +20,7 @@ class MainCoordinator : Coordinator {
     
     lazy var homeCoordinator : HomeCoordinator = {
         let homeCoordinator = HomeCoordinator(self.navigationController, dataStore)
+        homeCoordinator.delegate = self
         return homeCoordinator
     }()
     
@@ -29,3 +30,16 @@ class MainCoordinator : Coordinator {
     
     
 }
+
+extension MainCoordinator : CoordinatorDelegate {
+    func showEditGoalTime() {
+        
+    }
+    
+    func updateDataStore(_ viewModel: HomeViewModel) {
+        dataStore.updateDataStore(dayName: viewModel.currentDayName, isGoalAchieve: viewModel.isGoalAchieve, goalTime: viewModel.goalTimeOfTheDay, currentTime: viewModel.currentDoneTimeOfTheDay)
+    }
+    
+    
+}
+

@@ -11,6 +11,8 @@ import UIKit
 class HomeViewController : UIViewController {
     
     var timer = Timer()
+    var timerIsPlayed = false
+    var delegate : ViewControllerDelegate?
     
     
     var viewModel: HomeViewModel
@@ -38,35 +40,44 @@ class HomeViewController : UIViewController {
     private func setupView () {
         homeView = HomeView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
         view.addSubview(self.homeView!)
-        homeView?.configureHomeView(viewModel)
+        homeView?.configureHomeView(viewModel, timerIsPlayed: timerIsPlayed)
+        
         homeView?.playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
-        homeView?.pauseButton.addTarget(self, action: #selector(pauseButtonTapped), for: .touchUpInside)
+        homeView?.changeGoalTimeButton.addTarget(self, action: #selector(changeGoalTimeButtonTapped), for: .touchUpInside)
+        
     }
     
     @objc func playButtonTapped () {
-        timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
         
-
-    }
-    
-    @objc func pauseButtonTapped () {
-        timer.invalidate()
-    }
-    
-   
-    @objc func timerAction(){      
-        viewModel.currentDoneTimeOfTheDay += 0.01
-        if String(format: "%.2f", viewModel.currentDoneTimeOfTheDay) == String(format: "%.2f", viewModel.subGoalTime) || String(format: "%.2f", viewModel.currentDoneTimeOfTheDay) == String(format: "%.2f", viewModel.goalTimeOfTheDay)  {
-            timer.invalidate()
-            viewModel.currentDoneTimeOfTheDay += 0.01
-        }
+        timerIsPlayed.toggle()
         reloadView()
-//        homeView?.configureHomeView(viewModel)
+        
+        if timerIsPlayed == true {
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+        }
+        else {
+            timer.invalidate()
+            delegate?.pauseButtonDidTapped(viewModel)
+        }
+    }
+    
+    @objc func timerAction(){
+        viewModel.currentDoneTimeOfTheDay += 1
+        viewModel.timeLeftOfTheDay -= 1
+        
+        if viewModel.timeLeftOfTheDay == 0 {
+            timer.invalidate()
+        }
+                
+        reloadView()
+    }
+    
+    @objc func changeGoalTimeButtonTapped () {
+        delegate?.changeGoalTimeButtonTapped()
     }
     
     private func reloadView() {
-        homeView?.circularProgressView.animatingCircularPath(startPointCurrentTime: viewModel.currentDoneTimeOfTheDay/viewModel.goalTimeOfTheDay)
-        
+        homeView?.configureHomeView(viewModel, timerIsPlayed: timerIsPlayed)
     }
     
     

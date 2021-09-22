@@ -10,7 +10,8 @@ import UIKit
 
 class HomeCoordinator : Coordinator {
     
-    var viewController: UIViewController?
+    var viewController: HomeViewController?
+    var delegate : CoordinatorDelegate?
     var navigationController: UINavigationController
     var dataStore : CurrentDayDataStore
     init (_ navigationController: UINavigationController, _ dataStore : CurrentDayDataStore) {
@@ -18,10 +19,23 @@ class HomeCoordinator : Coordinator {
         self.dataStore = dataStore
         let homeViewModel = HomeViewModel(dataStore: dataStore)
         viewController = HomeViewController(homeViewModel)
+        viewController?.delegate = self
     }
     
     func start() {
         navigationController.pushViewController(self.viewController!, animated: false)
+    }
+    
+    
+}
+
+extension HomeCoordinator : ViewControllerDelegate {
+    func changeGoalTimeButtonTapped() {
+        delegate?.showEditGoalTime()
+    }
+    
+    func pauseButtonDidTapped(_ viewModel : HomeViewModel) {
+        delegate?.updateDataStore(viewModel)
     }
     
     

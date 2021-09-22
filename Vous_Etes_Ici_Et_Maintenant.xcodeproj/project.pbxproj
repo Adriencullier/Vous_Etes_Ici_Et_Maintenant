@@ -21,6 +21,8 @@
 		0344D2C026F8B82000B42463 /* CurrentDayDataStoreTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0344D2BF26F8B82000B42463 /* CurrentDayDataStoreTest.swift */; };
 		0344D2C226F8C76D00B42463 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0344D2C126F8C76D00B42463 /* HomeView.swift */; };
 		0344D2C426F9C33100B42463 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0344D2C326F9C33100B42463 /* CircularProgressView.swift */; };
+		03E704B826FB3027001DC042 /* ViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E704B726FB3026001DC042 /* ViewControllerDelegate.swift */; };
+		03E704BA26FB32BB001DC042 /* CoordinatorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E704B926FB32BB001DC042 /* CoordinatorDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		0344D2BF26F8B82000B42463 /* CurrentDayDataStoreTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentDayDataStoreTest.swift; sourceTree = "<group>"; };
 		0344D2C126F8C76D00B42463 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		0344D2C326F9C33100B42463 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
+		03E704B726FB3026001DC042 /* ViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerDelegate.swift; sourceTree = "<group>"; };
+		03E704B926FB32BB001DC042 /* CoordinatorDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,7 +128,9 @@
 		0344D29A26F85B1F00B42463 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				03E704BB26FB38F4001DC042 /* Edtit Goal Time */,
 				0344D2A426F85E3000B42463 /* Home */,
+				03E704B726FB3026001DC042 /* ViewControllerDelegate.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -151,6 +157,7 @@
 		0344D2A326F85BBD00B42463 /* Delegate Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				03E704B926FB32BB001DC042 /* CoordinatorDelegate.swift */,
 			);
 			path = "Delegate Navigation";
 			sourceTree = "<group>";
@@ -180,6 +187,13 @@
 				0344D2BF26F8B82000B42463 /* CurrentDayDataStoreTest.swift */,
 			);
 			path = Vous_Etes_Ici_Et_MaintenantTests;
+			sourceTree = "<group>";
+		};
+		03E704BB26FB38F4001DC042 /* Edtit Goal Time */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Edtit Goal Time";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,10 +301,12 @@
 				0344D2B126F8685C00B42463 /* CurrentDayDataStore.swift in Sources */,
 				0344D2C226F8C76D00B42463 /* HomeView.swift in Sources */,
 				0344D28426F85AA700B42463 /* AppDelegate.swift in Sources */,
+				03E704B826FB3027001DC042 /* ViewControllerDelegate.swift in Sources */,
 				0344D29F26F85B5C00B42463 /* HomeCoordinator.swift in Sources */,
 				0344D2A126F85B7300B42463 /* CoordinatorProtocol.swift in Sources */,
 				0344D29D26F85B5100B42463 /* MainCoordinator.swift in Sources */,
 				0344D28626F85AA700B42463 /* SceneDelegate.swift in Sources */,
+				03E704BA26FB32BB001DC042 /* CoordinatorDelegate.swift in Sources */,
 				0344D2A626F85E3C00B42463 /* HomeViewController.swift in Sources */,
 				0344D2C426F9C33100B42463 /* CircularProgressView.swift in Sources */,
 			);

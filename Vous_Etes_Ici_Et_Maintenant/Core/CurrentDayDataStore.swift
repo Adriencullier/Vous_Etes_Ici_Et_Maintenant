@@ -38,7 +38,7 @@ class CurrentDayDataStore {
         }
     }
     
-    private var goalTimeOfTheDay : Double = UserDefaults.standard.object(forKey: "goalTime") as? Double ?? 15 {
+    private var goalTimeOfTheDay : Double = UserDefaults.standard.object(forKey: "goalTime") as? Double ?? 0 {
         willSet {
             UserDefaults.standard.set(newValue, forKey: "goalTime")
         }
@@ -50,20 +50,26 @@ class CurrentDayDataStore {
         }
     }
     
+    public func updateDataStore (dayName : String, isGoalAchieve : Bool, goalTime : Double, currentTime : Double) {
+        updateDayName(newValue: dayName)
+        updateIsGoalAchieve(newValue: isGoalAchieve)
+        updateGoalTime(newValue: goalTime)
+        updateCurrentTime(newValue: currentTime)
+    }
     
-    public func updateDayName (newValue : String) {
+    private func updateDayName (newValue : String) {
         UserDefaults.standard.set(today, forKey: "currentDay")
     }
     
-    public func updateIsGoalAchieve (newValue : Bool) {
+    private func updateIsGoalAchieve (newValue : Bool) {
         self.isGoalAchieve = newValue
     }
     
-    public func updateGoalTime (newValue : Double) {
+    private func updateGoalTime (newValue : Double) {
         self.goalTimeOfTheDay = newValue
     }
     
-    public func updateCurrentTime (newValue : Double) {
+    private func updateCurrentTime (newValue : Double) {
         self.currentTime = newValue
     }
     

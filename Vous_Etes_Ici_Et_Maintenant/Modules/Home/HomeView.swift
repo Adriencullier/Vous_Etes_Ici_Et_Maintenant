@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 class HomeView : UIView {
+    
     var dayLabel : UILabel = {
         let dayLabel = UILabel()
         dayLabel.textAlignment = .center
@@ -17,15 +18,6 @@ class HomeView : UIView {
         return dayLabel
     }()
     
-    
-    var goalTimeLabel : UILabel = {
-        let goalTimeLabel = UILabel()
-        goalTimeLabel.textAlignment = .center
-        goalTimeLabel.numberOfLines = 0
-        goalTimeLabel.textColor = .black
-        return goalTimeLabel
-    }()
-
     var currentTimeLabel : UILabel = {
         let currentTimeLabel = UILabel()
         currentTimeLabel.textAlignment = .center
@@ -33,18 +25,19 @@ class HomeView : UIView {
         currentTimeLabel.textColor = .black
         return currentTimeLabel
     }()
+
+    var goalTimeOfTheDayLabel : UILabel = {
+        let goalTimeOfTheDayLabel = UILabel()
+        goalTimeOfTheDayLabel.textAlignment = .center
+        goalTimeOfTheDayLabel.numberOfLines = 0
+        goalTimeOfTheDayLabel.textColor = .black
+        return goalTimeOfTheDayLabel
+    }()
     
     var playButton : UIButton = {
         let playButton = UIButton()
-        playButton.setTitle("Play", for: .normal)
-        playButton.setTitleColor(UIColor.black, for: .normal)
+
         return playButton
-    }()
-    var pauseButton : UIButton = {
-        let pauseButton = UIButton()
-        pauseButton.setTitle("Pause", for: .normal)
-        pauseButton.setTitleColor(UIColor.black, for: .normal)
-        return pauseButton
     }()
     
     var circularProgressView : CircularProgressView = {
@@ -52,14 +45,21 @@ class HomeView : UIView {
         return circularProgressView
     }()
     
+    var changeGoalTimeButton : UIButton = {
+        let changeGoalTimeButton = UIButton()
+        changeGoalTimeButton.setTitle("Change d'objectif", for: .normal)
+        changeGoalTimeButton.setTitleColor(.blue, for: .normal)
+        return changeGoalTimeButton
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(dayLabel)
-        addSubview(goalTimeLabel)
         addSubview(currentTimeLabel)
+        addSubview(goalTimeOfTheDayLabel)
         addSubview(circularProgressView)
         addSubview(playButton)
-        addSubview(pauseButton)
+        addSubview(changeGoalTimeButton)
     }
     
     required init?(coder: NSCoder) {
@@ -67,20 +67,38 @@ class HomeView : UIView {
     }
     
     
-    public func configureHomeView(_ viewModel : HomeViewModel){
+    public func configureHomeView(_ viewModel : HomeViewModel,  timerIsPlayed : Bool){
+        
         setupConstraints()
+        self.circularProgressView.createCircularPath()
         
-        self.circularProgressView.createCircularPath(endPointSubGoal: viewModel.currentDoneTimeOfTheDay/viewModel.goalTimeOfTheDay + viewModel.subGoalTime/viewModel.goalTimeOfTheDay)
+        dayLabel.text = viewModel.currentDayName
+        goalTimeOfTheDayLabel.text = convertTotalSecondsToString(totalSeconds: Int(viewModel.goalTimeOfTheDay))
+        currentTimeLabel.text = convertTotalSecondsToString(totalSeconds: Int(viewModel.timeLeftOfTheDay))
+
+        circularProgressView.animatingCircularPath(startPointCurrentTime: viewModel.currentDoneTimeOfTheDay/viewModel.goalTimeOfTheDay)
         
-    
-        dayLabel.text = viewModel.currentDay
-        goalTimeLabel.text = "Votre objectif du jour est de \(viewModel.goalTimeOfTheDay) minutes"
+        if timerIsPlayed == true {
+            self.playButton.setImage(UIImage(systemName: "pause"), for: .normal)
+        }
+        else {
+            self.playButton.setImage(UIImage(systemName: "play"), for: .normal)
+        }
         
     }
     
-
     
-    
+    private func convertTotalSecondsToString (totalSeconds : Int) -> String {
+        let hours : Int = {totalSeconds/3600}()
+        let minutes : Int = {(totalSeconds % 3600) / 60}()
+        let seconds : Int = {(totalSeconds % 3600) % 60}()
+        
+        var timeString = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        if hours < 1 {
+            timeString = String(format: "%02d:%02d", minutes, seconds)
+        }
+        return timeString
+    }
     
     private func setupConstraints(){
         dayLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -89,17 +107,16 @@ class HomeView : UIView {
         dayLabel.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor).isActive = true
         dayLabel.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor).isActive = true
         
-        goalTimeLabel.translatesAutoresizingMaskIntoConstraints = false
-        goalTimeLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        goalTimeLabel.topAnchor.constraint(equalTo: dayLabel.bottomAnchor, constant: 20).isActive = true
-        goalTimeLabel.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor).isActive = true
-        goalTimeLabel.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor).isActive = true
-        
         currentTimeLabel.translatesAutoresizingMaskIntoConstraints = false
-        currentTimeLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        currentTimeLabel.topAnchor.constraint(equalTo: goalTimeLabel.bottomAnchor, constant: 20).isActive = true
-        currentTimeLabel.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor).isActive = true
-        currentTimeLabel.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor).isActive = true
+        currentTimeLabel.centerXAnchor.constraint(equalTo: circularProgressView.centerXAnchor).isActive = true
+        currentTimeLabel.centerYAnchor.constraint(equalTo: circularProgressView.centerYAnchor).isActive = true
+
+        
+        goalTimeOfTheDayLabel.translatesAutoresizingMaskIntoConstraints = false
+        goalTimeOfTheDayLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        goalTimeOfTheDayLabel.topAnchor.constraint(equalTo: dayLabel.bottomAnchor, constant: 20).isActive = true
+        goalTimeOfTheDayLabel.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor).isActive = true
+        goalTimeOfTheDayLabel.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor).isActive = true
         
         circularProgressView.translatesAutoresizingMaskIntoConstraints = false
         circularProgressView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
@@ -108,16 +125,13 @@ class HomeView : UIView {
         circularProgressView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
         playButton.translatesAutoresizingMaskIntoConstraints = false
-        playButton.topAnchor.constraint(equalTo: circularProgressView.bottomAnchor).isActive = true
-        playButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        playButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        playButton.centerXAnchor.constraint(equalTo: circularProgressView.centerXAnchor).isActive = true
+        playButton.topAnchor.constraint(equalTo: currentTimeLabel.bottomAnchor, constant: 8).isActive = true
         
-        pauseButton.translatesAutoresizingMaskIntoConstraints = false
-        pauseButton.topAnchor.constraint(equalTo: playButton.bottomAnchor).isActive = true
-        pauseButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        pauseButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        
+        changeGoalTimeButton.translatesAutoresizingMaskIntoConstraints = false
+        changeGoalTimeButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        changeGoalTimeButton.topAnchor.constraint(equalTo: circularProgressView.bottomAnchor).isActive = true
+  
     }
     
 }

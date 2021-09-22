@@ -14,7 +14,7 @@ class HomeViewModel {
         self.dataStore = dataStore
     }
 
-    public var currentDay : String  {
+    public var currentDayName : String  {
         dataStore.currentDay.dayName
     }
     
@@ -22,7 +22,10 @@ class HomeViewModel {
         dataStore.currentDay.goalTime
     }()
     
-    public var subGoalTime : Double = 3
+    public lazy var timeLeftOfTheDay : Double = {
+        goalTimeOfTheDay - currentDoneTimeOfTheDay
+    }()
+    
     
   
     public lazy var currentDoneTimeOfTheDay : Double = {

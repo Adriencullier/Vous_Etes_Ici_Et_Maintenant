@@ -37,7 +37,7 @@ class CircularProgressView : UIView {
         
     }
     
-    public func createCircularPath(endPointSubGoal : Double) {
+    public func createCircularPath() {
         
         let circularPath = UIBezierPath(arcCenter: CGPoint(x: frame.size.width/2, y: frame.size.height/2), radius: frame.size.width/2, startAngle: -.pi/2, endAngle: 3 * .pi/2, clockwise: true)
         
@@ -46,19 +46,7 @@ class CircularProgressView : UIView {
         circleLayer.strokeColor = UIColor.gray.cgColor
         circleLayer.lineWidth = 10
 
-        
-        
-        
-        progressSubGoalLayer.path = circularPath.cgPath
-        progressSubGoalLayer.fillColor = UIColor.clear.cgColor
-        progressSubGoalLayer.strokeColor = UIColor.yellow.cgColor
-        progressSubGoalLayer.lineWidth = 10
-        progressSubGoalLayer.lineCap = .round
-        progressSubGoalLayer.strokeEnd = endPointSubGoal
-        
-        
         layer.addSublayer(circleLayer)
-        layer.addSublayer(progressSubGoalLayer)
     }
 
     
