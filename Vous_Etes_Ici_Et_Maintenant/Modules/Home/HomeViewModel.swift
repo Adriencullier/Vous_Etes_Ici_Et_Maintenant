@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AVFoundation
 
 class HomeViewModel {
     
@@ -36,6 +37,13 @@ class HomeViewModel {
     
     public var isGoalAchieve : Bool {
         dataStore.currentDay.isGoalAchieve
+    }
+    
+    public var soundWhenTimeIsDone : SystemSoundID {
+        
+        let systemSoundId : SystemSoundID = 1027
+        return systemSoundId
+        
     }
     
     

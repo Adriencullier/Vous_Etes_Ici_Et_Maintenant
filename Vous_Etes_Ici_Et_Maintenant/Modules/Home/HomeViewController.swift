@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import AudioToolbox
+
 
 class HomeViewController : UIViewController {
     
@@ -65,6 +67,8 @@ class HomeViewController : UIViewController {
     }
     
     @objc func stopButtonTapped () {
+        timerIsPlayed = false
+        timer.invalidate()
         delegate?.stopButtonDidTapped()
     }
     
@@ -74,18 +78,21 @@ class HomeViewController : UIViewController {
         
         if viewModel.timeLeftOfTheDay <= 0 {
             timer.invalidate()
+            AudioServicesPlaySystemSound(viewModel.soundWhenTimeIsDone)
             viewModel.timeLeftOfTheDay = 0
+            
         }
                 
         reloadView()
     }
     
     @objc func changeGoalTimeButtonTapped () {
+        timerIsPlayed = false
+        timer.invalidate()
         delegate?.changeGoalTimeButtonTapped()
     }
     
     public func reloadView() {
-        
         homeView?.configureHomeView(viewModel, timerIsPlayed: timerIsPlayed)
     }
     

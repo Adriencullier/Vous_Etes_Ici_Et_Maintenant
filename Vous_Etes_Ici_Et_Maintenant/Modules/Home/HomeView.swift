@@ -47,7 +47,7 @@ class HomeView : UIView {
     }()
     
     var circularProgressView : CircularProgressView = {
-        let circularProgressView = CircularProgressView(frame: CGRect(x: 0, y: 0, width: 150, height: 150))
+        let circularProgressView = CircularProgressView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
         return circularProgressView
     }()
     
@@ -146,20 +146,20 @@ class HomeView : UIView {
         circularProgressView.translatesAutoresizingMaskIntoConstraints = false
         circularProgressView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         circularProgressView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        circularProgressView.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        circularProgressView.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        circularProgressView.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        circularProgressView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
         playButton.translatesAutoresizingMaskIntoConstraints = false
-        playButton.rightAnchor.constraint(equalTo: circularProgressView.centerXAnchor, constant: -5).isActive = true
-        playButton.topAnchor.constraint(equalTo: currentTimeLabel.bottomAnchor, constant: 8).isActive = true
+        playButton.rightAnchor.constraint(equalTo: circularProgressView.centerXAnchor, constant: -10).isActive = true
+        playButton.topAnchor.constraint(equalTo: currentTimeLabel.bottomAnchor, constant: 20).isActive = true
         
         stopButton.translatesAutoresizingMaskIntoConstraints = false
-        stopButton.leftAnchor.constraint(equalTo: circularProgressView.centerXAnchor, constant: 5).isActive = true
-        stopButton.topAnchor.constraint(equalTo: currentTimeLabel.bottomAnchor, constant: 8).isActive = true
+        stopButton.leftAnchor.constraint(equalTo: circularProgressView.centerXAnchor, constant: 10).isActive = true
+        stopButton.topAnchor.constraint(equalTo: currentTimeLabel.bottomAnchor, constant: 20).isActive = true
         
         changeGoalTimeButton.translatesAutoresizingMaskIntoConstraints = false
         changeGoalTimeButton.centerXAnchor.constraint(equalTo: circularProgressView.centerXAnchor).isActive = true
-        changeGoalTimeButton.bottomAnchor.constraint(equalTo: currentTimeLabel.topAnchor, constant: -10).isActive = true
+        changeGoalTimeButton.bottomAnchor.constraint(equalTo: currentTimeLabel.topAnchor, constant: -20).isActive = true
   
     }
     
