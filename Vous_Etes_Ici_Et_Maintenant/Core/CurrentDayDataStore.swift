@@ -69,7 +69,7 @@ class CurrentDayDataStore {
         self.goalTimeOfTheDay = newValue
     }
     
-    private func updateCurrentTime (newValue : Double) {
+    public func updateCurrentTime (newValue : Double) {
         self.currentTime = newValue
     }
     

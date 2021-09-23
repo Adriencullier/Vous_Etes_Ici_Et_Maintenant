@@ -23,7 +23,8 @@ class HomeViewModel {
     }()
     
     public lazy var timeLeftOfTheDay : Double = {
-        goalTimeOfTheDay - currentDoneTimeOfTheDay
+        var timeLeftOfTheDay = goalTimeOfTheDay - currentDoneTimeOfTheDay
+        return timeLeftOfTheDay
     }()
     
     

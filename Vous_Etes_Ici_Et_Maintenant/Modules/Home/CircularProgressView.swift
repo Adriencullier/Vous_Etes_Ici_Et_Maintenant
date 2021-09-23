@@ -27,8 +27,8 @@ class CircularProgressView : UIView {
         
         progressLayer.path = circularPath.cgPath
         progressLayer.fillColor = UIColor.clear.cgColor
-        progressLayer.strokeColor = UIColor.blue.cgColor
-        progressLayer.lineWidth = 10
+        progressLayer.strokeColor = UIColor.systemBlue.cgColor
+        progressLayer.lineWidth = 5
         progressLayer.lineCap = .round
         progressLayer.strokeEnd = startPointCurrentTime
         
@@ -43,8 +43,8 @@ class CircularProgressView : UIView {
         
         circleLayer.path = circularPath.cgPath
         circleLayer.fillColor = UIColor.clear.cgColor
-        circleLayer.strokeColor = UIColor.gray.cgColor
-        circleLayer.lineWidth = 10
+        circleLayer.strokeColor = UIColor.lightGray.cgColor
+        circleLayer.lineWidth = 5
 
         layer.addSublayer(circleLayer)
     }

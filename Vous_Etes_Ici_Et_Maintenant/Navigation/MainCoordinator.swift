@@ -38,8 +38,17 @@ class MainCoordinator : Coordinator {
 }
 
 extension MainCoordinator : CoordinatorDelegate {
+    func putCurrentTimeDoneToZero() {
+        dataStore.updateCurrentTime(newValue: 0)
+        let homeViewModel = HomeViewModel(dataStore: dataStore)
+        self.homeCoordinator.viewController?.viewModel = homeViewModel
+        self.homeCoordinator.viewController?.reloadView()
+    }
+    
     func reloadHomeView() {
         print("reload")
+        let homeViewModel = HomeViewModel(dataStore: dataStore)
+        self.homeCoordinator.viewController?.viewModel = homeViewModel
         self.homeCoordinator.viewController?.reloadView()
     }
     

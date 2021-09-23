@@ -13,4 +13,5 @@ protocol CoordinatorDelegate {
     func reloadHomeView()
     func updateGoalTimeDataStore(goalTime : Double)
     func showEditGoalTime()
+    func putCurrentTimeDoneToZero()
 }

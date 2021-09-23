@@ -43,6 +43,9 @@ class HomeViewController : UIViewController {
         homeView?.configureHomeView(viewModel, timerIsPlayed: timerIsPlayed)
         
         homeView?.playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
+        
+        homeView?.stopButton.addTarget(self, action: #selector(stopButtonTapped), for: .touchUpInside)
+        
         homeView?.changeGoalTimeButton.addTarget(self, action: #selector(changeGoalTimeButtonTapped), for: .touchUpInside)
         
     }
@@ -61,12 +64,17 @@ class HomeViewController : UIViewController {
         }
     }
     
+    @objc func stopButtonTapped () {
+        delegate?.stopButtonDidTapped()
+    }
+    
     @objc func timerAction(){
         viewModel.currentDoneTimeOfTheDay += 1
         viewModel.timeLeftOfTheDay -= 1
         
-        if viewModel.timeLeftOfTheDay == 0 {
+        if viewModel.timeLeftOfTheDay <= 0 {
             timer.invalidate()
+            viewModel.timeLeftOfTheDay = 0
         }
                 
         reloadView()

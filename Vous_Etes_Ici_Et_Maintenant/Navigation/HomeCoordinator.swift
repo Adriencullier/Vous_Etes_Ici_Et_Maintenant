@@ -30,6 +30,10 @@ class HomeCoordinator : Coordinator {
 }
 
 extension HomeCoordinator : HomeViewControllerDelegate {
+    func stopButtonDidTapped() {
+        delegate?.putCurrentTimeDoneToZero()
+    }
+    
     func changeGoalTimeButtonTapped() {
         delegate?.showEditGoalTime()
     }
