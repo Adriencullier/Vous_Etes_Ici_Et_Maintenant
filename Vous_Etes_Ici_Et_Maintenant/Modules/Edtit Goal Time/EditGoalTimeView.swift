@@ -39,6 +39,8 @@ class EditGoalTimeView : UIView {
         goalTimePickerView.translatesAutoresizingMaskIntoConstraints = false
         goalTimePickerView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         goalTimePickerView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        goalTimePickerView.widthAnchor.constraint(equalTo: self.widthAnchor, constant: 20).isActive = true
+        goalTimePickerView.widthAnchor.constraint(equalToConstant: 100).isActive = true
         
         validateButton.translatesAutoresizingMaskIntoConstraints = false
         validateButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true

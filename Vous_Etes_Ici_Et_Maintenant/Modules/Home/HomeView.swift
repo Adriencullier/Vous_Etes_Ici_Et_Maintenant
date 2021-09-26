@@ -77,6 +77,7 @@ class HomeView : UIView {
         
         setupConstraints()
         self.circularProgressView.createCircularPath()
+        self.circularProgressView.createSubGoalCircularPath(endPoint: (viewModel.currentDoneTimeStored/viewModel.goalTimeOfTheDay)+(viewModel.subGoalTime/viewModel.goalTimeOfTheDay))
         
         dayLabel.text = viewModel.currentDayName
         goalTimeOfTheDayLabel.text = "L'objectif du jour est de \n \(convertTotalSecondsToLiteralString(totalSeconds: Int(viewModel.goalTimeOfTheDay)))"

@@ -10,8 +10,8 @@ import AVFoundation
 
 class HomeViewModel {
     
-    private var dataStore : CurrentDayDataStore
-    init (dataStore : CurrentDayDataStore) {
+    private var dataStore : CurrentDayDataStoreProtocol
+    init (dataStore : CurrentDayDataStoreProtocol) {
         self.dataStore = dataStore
     }
 
@@ -23,6 +23,8 @@ class HomeViewModel {
         dataStore.currentDay.goalTime
     }()
     
+    public lazy var subGoalTime : Double = 0
+    
     public lazy var timeLeftOfTheDay : Double = {
         var timeLeftOfTheDay = goalTimeOfTheDay - currentDoneTimeOfTheDay
         return timeLeftOfTheDay
@@ -31,6 +33,10 @@ class HomeViewModel {
     
   
     public lazy var currentDoneTimeOfTheDay : Double = {
+        dataStore.currentDay.currentTime
+    }()
+    
+    public lazy var currentDoneTimeStored : Double = {
         dataStore.currentDay.currentTime
     }()
     

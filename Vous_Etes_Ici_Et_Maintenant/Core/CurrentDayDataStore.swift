@@ -7,7 +7,11 @@
 
 import Foundation
 
-class CurrentDayDataStore {
+protocol CurrentDayDataStoreProtocol {
+    var currentDay : Day { get }
+}
+
+class CurrentDayDataStore : CurrentDayDataStoreProtocol {
     
     init() {
     initToday()
@@ -20,7 +24,7 @@ class CurrentDayDataStore {
         return currentDay
     }
         
-    public var dayName : String  {
+    private var dayName : String  {
         let dayNameStored = UserDefaults.standard.object(forKey: "currentDay") as? String ?? "Default"
         
         if dayNameStored == today {
@@ -75,7 +79,7 @@ class CurrentDayDataStore {
     
     /// 1- Check if today is different of the current day Stored
     /// 2- If today is different, it creates a new Day
-    public func initToday () {
+    private func initToday () {
         let today = getToday()
         if self.currentDay.dayName != today {
         todayIsANewDay()
