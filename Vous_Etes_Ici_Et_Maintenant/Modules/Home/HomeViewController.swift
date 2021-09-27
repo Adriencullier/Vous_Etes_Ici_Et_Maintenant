@@ -17,8 +17,8 @@ class HomeViewController : UIViewController {
     var delegate : HomeViewControllerDelegate?
     
     
-    var viewModel: HomeViewModel
-    init (_ viewModel: HomeViewModel) {
+    var viewModel: HomeViewModelProtocol
+    init (_ viewModel: HomeViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -74,15 +74,13 @@ class HomeViewController : UIViewController {
     
     @objc func timerAction(){
         viewModel.currentDoneTimeOfTheDay += 1
-        viewModel.timeLeftOfTheDay -= 1
+        viewModel.timeLeftOfTheDayDouble -= 1
         
-        if viewModel.timeLeftOfTheDay <= 0 {
+        if viewModel.timeLeftOfTheDayDouble <= 0 {
             timer.invalidate()
             AudioServicesPlaySystemSound(viewModel.soundWhenTimeIsDone)
-            viewModel.timeLeftOfTheDay = 0
-            
+            viewModel.timeLeftOfTheDayDouble = 0
         }
-                
         reloadView()
     }
     

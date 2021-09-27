@@ -8,8 +8,8 @@
 import Foundation
 
 class EditGoalTimeViewModel {
-    var dataStore : CurrentDayDataStore
-    init (dataStore : CurrentDayDataStore) {
+    var dataStore : CurrentDayDataStoreProtocol
+    init (dataStore : CurrentDayDataStoreProtocol) {
         self.dataStore = dataStore
     }
     

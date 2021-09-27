@@ -8,47 +8,43 @@
 import Foundation
 
 protocol CurrentDayDataStoreProtocol {
-    var currentDay : Day { get }
+    var currentDay : Day {get}
+    func updateDataStore (dayName : String, isGoalAchieve : Bool, goalTime : Double, currentTime : Double)
+    func updateDayName (newValue : String)
+    func updateIsGoalAchieve (newValue : Bool)
+    func updateGoalTime (newValue : Double)
+    func updateCurrentTime (newValue : Double)
+    
 }
 
 class CurrentDayDataStore : CurrentDayDataStoreProtocol {
     
-    init() {
-    initToday()
-    }
+    /// When the class is initialized, if today and the storedDay are != it creates and store the new day
+    init() { initToday() }
     
-    lazy var today = getToday()
+    internal lazy var today : String = getToday()
     
-    public var currentDay : Day {
+    public lazy var currentDay : Day = {
         let currentDay = Day(dayName: dayName, isGoalAchieve: isGoalAchieve, goalTime: goalTimeOfTheDay, currentTime: currentTime)
         return currentDay
-    }
+    }()
         
-    private var dayName : String  {
-        let dayNameStored = UserDefaults.standard.object(forKey: "currentDay") as? String ?? "Default"
-        
-        if dayNameStored == today {
-            return dayNameStored
-        }
-        else {
-            todayIsANewDay()
-            return UserDefaults.standard.object(forKey: "currentDay") as? String ?? "Default"
-        }
-    }
+    public private(set) var dayName : String = UserDefaults.standard.object(forKey: "currentDay") as? String ?? "Default"
     
-    private var isGoalAchieve : Bool = UserDefaults.standard.object(forKey: "isGoalAchieve") as? Bool ?? false {
+    public private(set) var isGoalAchieve : Bool = UserDefaults.standard.object(forKey: "isGoalAchieve") as? Bool ?? false {
+        
         willSet {
-            UserDefaults.standard.set(newValue, forKey: "isGoalAchieve")
+            UserDefaults.standard.set(newValue as Bool, forKey: "isGoalAchieve")
         }
     }
     
-    private var goalTimeOfTheDay : Double = UserDefaults.standard.object(forKey: "goalTime") as? Double ?? 0 {
+    public private(set) var goalTimeOfTheDay : Double = UserDefaults.standard.object(forKey: "goalTime") as? Double ?? 0 {
         willSet {
             UserDefaults.standard.set(newValue, forKey: "goalTime")
         }
     }
     
-    private var currentTime : Double = UserDefaults.standard.object(forKey: "currentTime") as? Double ?? 0 {
+    public private(set) var currentTime : Double = UserDefaults.standard.object(forKey: "currentTime") as? Double ?? 0 {
         willSet {
             UserDefaults.standard.set(newValue, forKey: "currentTime")
         }
@@ -61,11 +57,11 @@ class CurrentDayDataStore : CurrentDayDataStoreProtocol {
         updateCurrentTime(newValue: currentTime)
     }
     
-    private func updateDayName (newValue : String) {
+    public func updateDayName (newValue : String) {
         UserDefaults.standard.set(today, forKey: "currentDay")
     }
     
-    private func updateIsGoalAchieve (newValue : Bool) {
+    public func updateIsGoalAchieve (newValue : Bool) {
         self.isGoalAchieve = newValue
     }
     
@@ -90,20 +86,12 @@ class CurrentDayDataStore : CurrentDayDataStoreProtocol {
     /// TO DO : Default goalTime, currentTime and GoalIsAchieve must provide from Userdata
     private func todayIsANewDay() {
         let today = getToday()
-        let goalTimeDefault : Double = 15
-        let currentTimeDefault : Double = 0
-        let isGoalAchieveDefault : Bool = false
-        
-        self.updateCurrentTime(newValue: currentTimeDefault)
-        self.updateGoalTime(newValue: goalTimeDefault)
-        self.updateIsGoalAchieve(newValue: isGoalAchieveDefault)
-        self.updateDayName(newValue: today)
+        self.updateDataStore(dayName: today, isGoalAchieve: false, goalTime: 15, currentTime: 0)
     }
     
-    
     /// Get today Date
-    /// - Returns: string like "Lundi 20 septembre"
-    private func getToday () -> String {
+    /// - Returns: formated string like "Lundi 20 septembre"
+    public func getToday () -> String {
         let today = Date()
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "EEEE d MMMM"

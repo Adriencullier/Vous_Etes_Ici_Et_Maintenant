@@ -23,7 +23,7 @@ class CircularProgressView : UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func animatingCircularPath (startPointCurrentTime : Double) {
+    public func animatingCircularPath (_ strokeStart : Double) {
         let circularPath = UIBezierPath(arcCenter: CGPoint(x: frame.size.width/2, y: frame.size.height/2), radius: frame.size.width/2, startAngle: -.pi/2, endAngle: 3 * .pi/2, clockwise: true)
         
         progressLayer.path = circularPath.cgPath
@@ -31,7 +31,7 @@ class CircularProgressView : UIView {
         progressLayer.strokeColor = UIColor.black.cgColor
         progressLayer.lineWidth = 5
         progressLayer.lineCap = .round
-        progressLayer.strokeEnd = startPointCurrentTime
+        progressLayer.strokeEnd = strokeStart
         
         layer.addSublayer(progressLayer)
 
@@ -51,7 +51,7 @@ class CircularProgressView : UIView {
         layer.addSublayer(circleLayer)
     }
     
-    public func createSubGoalCircularPath(endPoint : Double) {
+    public func createSubGoalCircularPath(_ strokeEnd : Double) {
         let circularPath = UIBezierPath(arcCenter: CGPoint(x: frame.size.width/2, y: frame.size.height/2), radius: frame.size.width/2, startAngle: -.pi/2, endAngle: 3 * .pi/2, clockwise: true)
         
         subGoalLayer.path = circularPath.cgPath
@@ -59,7 +59,7 @@ class CircularProgressView : UIView {
         subGoalLayer.strokeColor = UIColor.lightGray.cgColor
         subGoalLayer.lineWidth = 5
         subGoalLayer.lineCap = .round
-        subGoalLayer.strokeEnd = endPoint
+        subGoalLayer.strokeEnd = strokeEnd
         
         layer.addSublayer(subGoalLayer)
     }

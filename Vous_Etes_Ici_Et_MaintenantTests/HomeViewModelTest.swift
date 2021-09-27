@@ -2,21 +2,40 @@
 //  HomeViewModelTest.swift
 //  HomeViewModelTest
 //
-//  Created by Adrien Cullier on 26/09/2021.
+//  Created by Adrien Cullier on 27/09/2021.
 //
 
 import XCTest
 @testable import Vous_Etes_Ici_Et_Maintenant
 
 class HomeViewModelTest: XCTestCase {
-
-    class TestDataStore : CurrentDayDataStoreProtocol {
-        var currentDay: Day = Day(dayName: "Lundi", isGoalAchieve: false, goalTime: 15, currentTime: 0)
+    
+    var mockCurrentDataStore : CurrentDayDataStoreProtocol!
+    var homeViewModel : HomeViewModelProtocol!
+    
+    class MockCurrentDataStore : CurrentDayDataStoreProtocol {
+        var currentDay: Day = Day(dayName: "Lundi 4 mars", isGoalAchieve: true, goalTime: 45, currentTime: 18)
     }
     
-    let homeViewModel = HomeViewModel(dataStore: TestDataStore())
-    func testCurrentDayName () {
-        XCTAssertEqual(homeViewModel.currentDayName, "Lundi")
+    override func setUp()  {
+        mockCurrentDataStore = MockCurrentDataStore()
+        homeViewModel = HomeViewModel(dataStore: mockCurrentDataStore)
     }
-
+    
+    override func tearDown()  {
+        mockCurrentDataStore = nil
+        homeViewModel = nil
+    }
+    
+    func testHomeViewModel () {
+        XCTAssertEqual(homeViewModel.currentDayName, "Lundi 4 mars")
+        XCTAssertEqual(homeViewModel.isGoalAchieve, true)
+        XCTAssertEqual(homeViewModel.goalTimeOfTheDayDouble, 45)
+        XCTAssertEqual(homeViewModel.currentDoneTimeOfTheDay, 18)
+        XCTAssertEqual(homeViewModel.timeLeftOfTheDayDouble, 27)
+        XCTAssertEqual(homeViewModel.goalTimeOfTheDayLiteralString, "45 secondes")
+        XCTAssertEqual(homeViewModel.timeLeftOfTheDayTimerString, "00:27")
+    }
+    
+    
 }

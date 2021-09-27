@@ -12,8 +12,8 @@ class EditGoalTimeCoordinator : Coordinator {
     
     var viewController : EditGoalTimeViewController?
     var navigationController: UINavigationController
-    var dataStore : CurrentDayDataStore
-    init (navigationController: UINavigationController, dataStore : CurrentDayDataStore) {
+    var dataStore : CurrentDayDataStoreProtocol
+    init (navigationController: UINavigationController, dataStore : CurrentDayDataStoreProtocol) {
         self.navigationController = navigationController
         self.dataStore = dataStore
         let editGoalTimeViewModel = EditGoalTimeViewModel(dataStore: dataStore)

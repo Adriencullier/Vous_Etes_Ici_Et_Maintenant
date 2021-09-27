@@ -8,7 +8,7 @@
 import Foundation
 
 protocol CoordinatorDelegate {
-    func updateAllDataStore(_ viewModel : HomeViewModel)
+    func updateAllDataStore(_ viewModel : HomeViewModelProtocol)
     func dismissEditGoalTimeView ()
     func reloadHomeView()
     func updateGoalTimeDataStore(goalTime : Double)

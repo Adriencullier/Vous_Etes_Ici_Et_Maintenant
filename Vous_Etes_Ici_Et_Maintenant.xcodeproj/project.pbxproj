@@ -28,7 +28,8 @@
 		03E704C126FB3B97001DC042 /* EditGoalTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E704C026FB3B97001DC042 /* EditGoalTimeView.swift */; };
 		03E704C326FB3BB8001DC042 /* EditGoalTimeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E704C226FB3BB8001DC042 /* EditGoalTimeCoordinator.swift */; };
 		03E704C526FB478F001DC042 /* EditGoalTimeViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E704C426FB478F001DC042 /* EditGoalTimeViewControllerDelegate.swift */; };
-		03FE031B2700707600FF5FFB /* HomeViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FE031A2700707600FF5FFB /* HomeViewModelTest.swift */; };
+		03FE031D2701EA3800FF5FFB /* HomeViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FE031C2701EA3800FF5FFB /* HomeViewTest.swift */; };
+		03FE031F2701FA4500FF5FFB /* HomeViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FE031E2701FA4500FF5FFB /* HomeViewModelTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,7 +67,8 @@
 		03E704C026FB3B97001DC042 /* EditGoalTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGoalTimeView.swift; sourceTree = "<group>"; };
 		03E704C226FB3BB8001DC042 /* EditGoalTimeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGoalTimeCoordinator.swift; sourceTree = "<group>"; };
 		03E704C426FB478F001DC042 /* EditGoalTimeViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGoalTimeViewControllerDelegate.swift; sourceTree = "<group>"; };
-		03FE031A2700707600FF5FFB /* HomeViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTest.swift; sourceTree = "<group>"; };
+		03FE031C2701EA3800FF5FFB /* HomeViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewTest.swift; sourceTree = "<group>"; };
+		03FE031E2701FA4500FF5FFB /* HomeViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,7 +200,8 @@
 			isa = PBXGroup;
 			children = (
 				0344D2BF26F8B82000B42463 /* CurrentDayDataStoreTest.swift */,
-				03FE031A2700707600FF5FFB /* HomeViewModelTest.swift */,
+				03FE031E2701FA4500FF5FFB /* HomeViewModelTest.swift */,
+				03FE031C2701EA3800FF5FFB /* HomeViewTest.swift */,
 			);
 			path = Vous_Etes_Ici_Et_MaintenantTests;
 			sourceTree = "<group>";
@@ -339,8 +342,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03FE031F2701FA4500FF5FFB /* HomeViewModelTest.swift in Sources */,
 				0344D2C026F8B82000B42463 /* CurrentDayDataStoreTest.swift in Sources */,
-				03FE031B2700707600FF5FFB /* HomeViewModelTest.swift in Sources */,
+				03FE031D2701EA3800FF5FFB /* HomeViewTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

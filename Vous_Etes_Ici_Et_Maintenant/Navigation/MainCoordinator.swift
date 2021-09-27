@@ -10,7 +10,10 @@ import UIKit
 
 class MainCoordinator : Coordinator {
     
-    let dataStore = CurrentDayDataStore()
+    var dataStore : CurrentDayDataStoreProtocol {
+        let data = CurrentDayDataStore()
+        return data
+    }
     
     var viewController: UIViewController?
     var navigationController: UINavigationController
@@ -40,14 +43,14 @@ class MainCoordinator : Coordinator {
 extension MainCoordinator : CoordinatorDelegate {
     func putCurrentTimeDoneToZero() {
         dataStore.updateCurrentTime(newValue: 0)
-        let homeViewModel = HomeViewModel(dataStore: dataStore)
+        let homeViewModel : HomeViewModelProtocol = HomeViewModel(dataStore: dataStore)
         self.homeCoordinator.viewController?.viewModel = homeViewModel
         self.homeCoordinator.viewController?.reloadView()
     }
     
     func reloadHomeView() {
         print("reload")
-        let homeViewModel = HomeViewModel(dataStore: dataStore)
+        let homeViewModel : HomeViewModelProtocol = HomeViewModel(dataStore: dataStore)
         self.homeCoordinator.viewController?.viewModel = homeViewModel
         self.homeCoordinator.viewController?.reloadView()
     }
@@ -67,8 +70,8 @@ extension MainCoordinator : CoordinatorDelegate {
         editGoalTimeCoordinator.start()
     }
     
-    func updateAllDataStore(_ viewModel: HomeViewModel) {
-        dataStore.updateDataStore(dayName: viewModel.currentDayName, isGoalAchieve: viewModel.isGoalAchieve, goalTime: viewModel.goalTimeOfTheDay, currentTime: viewModel.currentDoneTimeOfTheDay)
+    func updateAllDataStore(_ viewModel: HomeViewModelProtocol) {
+        dataStore.updateDataStore(dayName: viewModel.currentDayName, isGoalAchieve: viewModel.isGoalAchieve, goalTime: viewModel.goalTimeOfTheDayDouble, currentTime: viewModel.currentDoneTimeOfTheDay)
     }
     
     

@@ -73,18 +73,18 @@ class HomeView : UIView {
     }
     
     
-    public func configureHomeView(_ viewModel : HomeViewModel,  timerIsPlayed : Bool){
+    public func configureHomeView(_ viewModel : HomeViewModelProtocol,  timerIsPlayed : Bool){
         
         setupConstraints()
         self.circularProgressView.createCircularPath()
-        self.circularProgressView.createSubGoalCircularPath(endPoint: (viewModel.currentDoneTimeStored/viewModel.goalTimeOfTheDay)+(viewModel.subGoalTime/viewModel.goalTimeOfTheDay))
+        self.circularProgressView.createSubGoalCircularPath( (getSubGoalStrokeEnd(viewModel)))
         
         dayLabel.text = viewModel.currentDayName
-        goalTimeOfTheDayLabel.text = "L'objectif du jour est de \n \(convertTotalSecondsToLiteralString(totalSeconds: Int(viewModel.goalTimeOfTheDay)))"
+        goalTimeOfTheDayLabel.text = "L'objectif du jour est de \n \(viewModel.goalTimeOfTheDayLiteralString)"
         
-        currentTimeLabel.text = convertTotalSecondsToTimerString(totalSeconds: Int(viewModel.timeLeftOfTheDay))
+        currentTimeLabel.text = viewModel.timeLeftOfTheDayTimerString
 
-        circularProgressView.animatingCircularPath(startPointCurrentTime: viewModel.currentDoneTimeOfTheDay/viewModel.goalTimeOfTheDay)
+        circularProgressView.animatingCircularPath(getAnimatingStrokeStart(viewModel))
         
         if timerIsPlayed == true {
             self.playButton.setImage(UIImage(systemName: "pause"), for: .normal)
@@ -95,36 +95,17 @@ class HomeView : UIView {
         
     }
     
-    private func convertTotalSecondsToLiteralString (totalSeconds : Int) -> String {
-        let hours : Int = {totalSeconds/3600}()
-        let minutes : Int = {(totalSeconds % 3600) / 60}()
-        let seconds : Int = {(totalSeconds % 3600) % 60}()
-        
-        var timeString = String(format: "%01d heures et %01d minutes", hours, minutes)
-        if hours < 1 {
-            if minutes < 1 {
-                timeString = String(format: "%01d secondes", seconds)
-            }
-            else {timeString = String(format: "%01d minutes", minutes)}
-        }
-        if hours > 1 && minutes < 1 {
-            timeString = String(format: "%01d heures", hours)
-        }
-        
-        return timeString
+    private func getSubGoalStrokeEnd (_ viewModel : HomeViewModelProtocol) -> Double {
+        return viewModel.currentDoneTimeStored/viewModel.goalTimeOfTheDayDouble + viewModel.subGoalTime/viewModel.goalTimeOfTheDayDouble
     }
     
-    private func convertTotalSecondsToTimerString (totalSeconds : Int) -> String {
-        let hours : Int = {totalSeconds/3600}()
-        let minutes : Int = {(totalSeconds % 3600) / 60}()
-        let seconds : Int = {(totalSeconds % 3600) % 60}()
-        
-        var timeString = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
-        if hours < 1 {
-            timeString = String(format: "%02d:%02d", minutes, seconds)
-        }
-        return timeString
+    private func getAnimatingStrokeStart (_ viewModel : HomeViewModelProtocol) -> Double {
+        return viewModel.currentDoneTimeOfTheDay/viewModel.goalTimeOfTheDayDouble
     }
+    
+    
+    
+    
     
     private func setupConstraints(){
         dayLabel.translatesAutoresizingMaskIntoConstraints = false

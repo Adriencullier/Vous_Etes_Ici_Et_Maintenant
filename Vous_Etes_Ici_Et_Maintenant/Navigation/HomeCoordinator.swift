@@ -13,11 +13,11 @@ class HomeCoordinator : Coordinator {
     var viewController: HomeViewController?
     var delegate : CoordinatorDelegate?
     var navigationController: UINavigationController
-    var dataStore : CurrentDayDataStore
-    init (_ navigationController: UINavigationController, _ dataStore : CurrentDayDataStore) {
+    var dataStore : CurrentDayDataStoreProtocol
+    init (_ navigationController: UINavigationController, _ dataStore : CurrentDayDataStoreProtocol) {
         self.navigationController = navigationController
         self.dataStore = dataStore
-        let homeViewModel = HomeViewModel(dataStore: dataStore)
+        let homeViewModel : HomeViewModelProtocol = HomeViewModel(dataStore: dataStore)
         viewController = HomeViewController(homeViewModel)
         viewController?.delegate = self
     }
@@ -38,7 +38,7 @@ extension HomeCoordinator : HomeViewControllerDelegate {
         delegate?.showEditGoalTime()
     }
     
-    func pauseButtonDidTapped(_ viewModel : HomeViewModel) {
+    func pauseButtonDidTapped(_ viewModel : HomeViewModelProtocol) {
         delegate?.updateAllDataStore(viewModel)
     }
     
