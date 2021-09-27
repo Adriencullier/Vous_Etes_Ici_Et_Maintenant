@@ -75,6 +75,11 @@ var seconds : [Int] = {
 }()
 
 extension EditGoalTimeViewController : UIPickerViewDelegate {
+    
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        50
+    }
+    
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
         75
     }

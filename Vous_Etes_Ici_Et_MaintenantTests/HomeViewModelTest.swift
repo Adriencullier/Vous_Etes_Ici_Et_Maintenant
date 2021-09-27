@@ -14,6 +14,26 @@ class HomeViewModelTest: XCTestCase {
     var homeViewModel : HomeViewModelProtocol!
     
     class MockCurrentDataStore : CurrentDayDataStoreProtocol {
+        func updateDataStore(dayName: String, isGoalAchieve: Bool, goalTime: Double, currentTime: Double) {
+            
+        }
+        
+        func updateDayName(newValue: String) {
+            
+        }
+        
+        func updateIsGoalAchieve(newValue: Bool) {
+            
+        }
+        
+        func updateGoalTime(newValue: Double) {
+            
+        }
+        
+        func updateCurrentTime(newValue: Double) {
+            
+        }
+        
         var currentDay: Day = Day(dayName: "Lundi 4 mars", isGoalAchieve: true, goalTime: 45, currentTime: 18)
     }
     
